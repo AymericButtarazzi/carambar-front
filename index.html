@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carambar & Co - Blagues</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-color: #fff9e6;
+      color: #cc0066;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #ffcc00;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #blague {
+      margin-top: 30px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bienvenue chez Carambar & Co</h1>
+  <button onclick="getBlague()">Raconte-moi une blague !</button>
+  <div id="blague"></div>
+
+  <script>
+    async function getBlague() {
+      try {
+        const res = await fetch('https://TON-API.onrender.com/api/v1/blagues/random'); // Remplace par ta vraie URL
+        const data = await res.json();
+        document.getElementById('blague').innerHTML = `
+          <p><strong>${data.question}</strong></p>
+          <p>${data.reponse}</p>
+        `;
+      } catch (err) {
+        document.getElementById('blague').innerText = "Erreur lors du chargement de la blague.";
+      }
+    }
+  </script>
+</body>
+</html>
